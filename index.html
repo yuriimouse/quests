@@ -3,9 +3,69 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quest</title>
+    <title>Квест</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+
+        input {
+            font-size: 1.3rem;
+            padding: 10px;
+        }
+
+        button {
+            display: block;
+            margin: 25px auto;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Квест працює :)</h1>
+
+    <h1>Коли в тебе день народження?</h1>
+
+    <input id="birthday" type="date">
+
+    <button id="enter">Це я :)</button>
+
+    <script>
+        async function sha256(text) {
+            const data = new TextEncoder().encode(text);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        async function enterQuest() {
+            const birthday = document.getElementById('birthday').value;
+
+            if (!birthday)
+                return;
+
+            const hash = await sha256(birthday);
+            const quest = hash.substring(0, 12);
+
+            window.location.href = './' + quest + '/';
+        }
+
+        document.getElementById('enter')
+            .addEventListener('click', enterQuest);
+    </script>
+
 </body>
 </html>

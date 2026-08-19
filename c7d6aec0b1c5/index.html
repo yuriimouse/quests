@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="uk">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,6 +37,31 @@
 
         #result {
             margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        hr {
+            margin: 60px 0;
+        }
+
+        #brands {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        #brands button {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        #result2 {
+            margin-top: 30px;
             padding: 20px;
             text-align: center;
             font-size: 1.5rem;
@@ -85,6 +111,30 @@
         Перша цифра коду: ?
     </div>
 
+    <hr>
+
+    <h2>Друга цифра</h2>
+
+    <p><strong>Хто тут зайвий?</strong></p>
+    <p>
+        <button type="button" id="hintButton">Підказка</button>
+        <span id="hint" style="display:none;">
+            Автомобіль ≠ мотоцикл. Або навпаки :)
+        </span>
+    </p>
+    <div id="brands">
+        <button type="button" data-digit="1">Honda</button>
+        <button type="button" data-digit="2">Toyota</button>
+        <button type="button" data-digit="3">BMW</button>
+        <button type="button" data-digit="4">Suzuki</button>
+        <button type="button" data-digit="5">Peugeot</button>
+        <button type="button" data-digit="6">Yamaha</button>
+    </div>
+
+    <div id="result2">
+        Друга цифра коду: ?
+    </div>
+
     <script>
         const inputs = [
             document.getElementById('q1'),
@@ -115,7 +165,26 @@
         inputs.forEach(input => {
             input.addEventListener('input', calculate);
         });
-    </script>
+
+        const brandButtons = document.querySelectorAll('#brands button');
+        const result2 = document.getElementById('result2');
+
+        brandButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const digit = button.dataset.digit;
+
+                result2.textContent = 'Друга цифра коду: ' + digit;
+
+                brandButtons.forEach(b => b.disabled = false);
+                button.disabled = true;
+            });
+        });
+
+        document.getElementById('hintButton').addEventListener('click', function () {
+            document.getElementById('hint').style.display = 'inline';
+            this.style.display = 'none';
+        });    </script>
 
 </body>
+
 </html>

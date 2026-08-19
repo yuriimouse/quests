@@ -4,9 +4,118 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Квест</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 0 20px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .question {
+            margin: 25px 0;
+        }
+
+        input {
+            width: 70px;
+            padding: 7px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        #result {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body style="font-family:sans-serif;text-align:center;margin-top:100px">
+
+<body>
+
     <h1>Привіт, сине. Я тобою пишаюся!</h1>
-    Давай відгадаємо код до твоєі скриньки.
+
+    <div class="intro">
+        Давай відгадаємо код до твоєї скриньки.
+    </div>
+
+    <h2>Перша цифра</h2>
+
+    <p>Дай числову відповідь на кожне питання.</p>
+
+    <div class="question">
+        <p>1. Скільки клітин контролює король у шахах, якщо стоїть не біля краю дошки?</p>
+        <input type="number" id="q1">
+    </div>
+
+    <div class="question">
+        <p>2. Якщо котячий хвіст назвати лапою, скільки лап буде у твоїх котів?</p>
+        <input type="number" id="q2">
+    </div>
+
+    <div class="question">
+        <p>3. Скільки людських Перснів Влади не мали пари серед гномських?</p>
+        <input type="number" id="q3">
+    </div>
+
+    <div class="question">
+        <p>4. Скільки спочатку було слонів, що тримали Диск?</p>
+        <input type="number" id="q4">
+    </div>
+
+    <div class="question">
+        <p>5. Який номер мав лід, винайдений у «Колисці для кішки»?</p>
+        <input type="number" id="q5">
+    </div>
+
+    <div id="result">
+        Перша цифра коду: ?
+    </div>
+
+    <script>
+        const inputs = [
+            document.getElementById('q1'),
+            document.getElementById('q2'),
+            document.getElementById('q3'),
+            document.getElementById('q4'),
+            document.getElementById('q5')
+        ];
+
+        const result = document.getElementById('result');
+
+        function calculate() {
+            if (inputs.some(input => input.value === '')) {
+                result.textContent = 'Перша цифра коду: ?';
+                return;
+            }
+
+            const sum = inputs.reduce(
+                (total, input) => total + Number(input.value),
+                0
+            );
+
+            const digit = Math.floor(sum / 4);
+
+            result.textContent = 'Перша цифра коду: ' + digit;
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+    </script>
+
 </body>
 </html>

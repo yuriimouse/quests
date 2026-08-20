@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="uk">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,11 +12,42 @@
             margin: 60px auto;
             padding: 0 20px;
             line-height: 1.5;
-            text-align: center;
         }
 
         .intro {
             margin-bottom: 50px;
+        }
+
+        .art-choice {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .art-choice label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .art-choice img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            max-height: 220px;
+        }
+
+        .art-choice input {
+            width: auto;
+        }
+
+        @media (max-width: 600px) {
+            .art-choice {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .captcha-wrap {
@@ -83,12 +115,6 @@
             border-radius: 8px;
         }
 
-        #result3 {
-            margin-top: 28px;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
         @media (max-width: 760px) {
             .captcha-wrap {
                 gap: 10px;
@@ -111,6 +137,33 @@
                 height: 54px;
             }
         }
+
+        .question {
+            margin: 25px 0;
+        }
+
+        .question input {
+            width: 70px;
+            padding: 7px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .inline-logo {
+            height: 1.4em;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        #result1,
+        #result2,
+        #result3 {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -119,6 +172,98 @@
 
     <div class="intro">
         Давай відгадаємо код до твоєї скриньки.
+    </div>
+
+    <hr>
+
+    <h2>Перша цифра</h2>
+
+    <p>Дай числову відповідь на кожне питання.</p>
+
+    <div class="question">
+        <p>1. Якщо котячий хвіст назвати лапою, скільки лап буде у твоїх кішок?</p>
+        <input type="number" class="q1">
+    </div>
+
+    <div class="question">
+        <p>2. How many impossible things could the White Queen believe before breakfast?</p>
+        <input type="number" class="q1">
+    </div>
+
+    <div class="question">
+        <p>3. На якій станції Великого Фонтану Зевс краде Європу?</p>
+        <input type="number" class="q1">
+    </div>
+
+    <div class="question">
+        <p>4. How many U.S. states share a land border with Texas?</p>
+        <input type="number" class="q1">
+    </div>
+
+    <div class="question">
+        <p>5. Який номер трамвая довезе тебе від Короля Данила на Сихів?</p>
+        <input type="number" class="q1">
+    </div>
+
+    <div class="question">
+        <p>
+            6. How many letters occur exactly twice in
+            <img class="inline-logo" src="arts/beetroot.png" alt="Beetroot">?
+        </p>
+        <input type="number" class="q1">
+    </div>
+
+    <div class="question">
+        <p>7. Скільки чемпіонських титулів NBA виграв Майкл Джордан?</p>
+        <input type="number" class="q1">
+    </div>
+
+    <div id="result1">
+        Перша цифра коду: ?
+    </div>
+
+    <hr>
+
+    <h2>Друга цифра</h2>
+
+    <p><strong>Хто тут зайвий?</strong></p>
+
+    <div class="art-choice">
+
+        <label>
+            <img src="arts/artist1.png" alt="">
+            <input type="radio" name="artist" value="1">
+        </label>
+
+        <label>
+            <img src="arts/artist2.png" alt="">
+            <input type="radio" name="artist" value="2">
+        </label>
+
+        <label>
+            <img src="arts/artist3.jpg" alt="">
+            <input type="radio" name="artist" value="3">
+        </label>
+
+        <label>
+            <img src="arts/artist4.jpg" alt="">
+            <input type="radio" name="artist" value="4">
+        </label>
+
+        <label>
+            <img src="arts/artist5.jpg" alt="">
+            <input type="radio" name="artist" value="5">
+        </label>
+
+        <label>
+            <img src="arts/artist6.png" alt="">
+            <input type="radio" name="artist" value="6">
+        </label>
+
+    </div>
+
+    <div id="result2">
+        Друга цифра коду: ?
     </div>
 
     <h2>Третя цифра</h2>
@@ -164,6 +309,45 @@
                     'Третя цифра коду: ' + cell.dataset.digit;
             });
         });
+
+        const artistChoices = document.querySelectorAll(
+            'input[name="artist"]'
+        );
+
+        const result2 = document.getElementById('result2');
+
+        artistChoices.forEach(choice => {
+            choice.addEventListener('change', () => {
+                result2.textContent =
+                    'Друга цифра коду: ' + choice.value;
+            });
+        });
+
+        const firstInputs = document.querySelectorAll('.q1');
+        const result1 = document.getElementById('result1');
+
+        function calculateFirstDigit() {
+            const values = Array.from(firstInputs).map(input => input.value);
+
+            if (values.some(value => value === '')) {
+                result1.textContent = 'Перша цифра коду: ?';
+                return;
+            }
+
+            const sum = values.reduce(
+                (total, value) => total + Number(value),
+                0
+            );
+
+            result1.textContent =
+                'Перша цифра коду: ' + Math.floor(sum / 11);
+        }
+
+        firstInputs.forEach(input => {
+            input.addEventListener('input', calculateFirstDigit);
+        });
+
     </script>
 </body>
+
 </html>

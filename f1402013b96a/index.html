@@ -4,9 +4,166 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Квест</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 980px;
+            margin: 60px auto;
+            padding: 0 20px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .intro {
+            margin-bottom: 50px;
+        }
+
+        .captcha-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 24px;
+        }
+
+        .map-captcha {
+            position: relative;
+            width: min(72vw, 620px);
+            aspect-ratio: 1 / 1;
+            flex: 0 1 620px;
+        }
+
+        .map-captcha img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .map-captcha .cells {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .map-captcha button {
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .map-captcha button:hover {
+            background: rgba(70, 110, 180, 0.08);
+        }
+
+        .map-captcha button.selected {
+            background: rgba(70, 110, 180, 0.16);
+        }
+
+        .clue {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 0 0 auto;
+        }
+
+        .arrow {
+            font-size: 2.4rem;
+            line-height: 1;
+        }
+
+        .clue img {
+            width: 120px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        #result3 {
+            margin-top: 28px;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 760px) {
+            .captcha-wrap {
+                gap: 10px;
+            }
+
+            .map-captcha {
+                width: min(72vw, 520px);
+            }
+
+            .clue {
+                gap: 7px;
+            }
+
+            .arrow {
+                font-size: 1.6rem;
+            }
+
+            .clue img {
+                width: 72px;
+                height: 54px;
+            }
+        }
+    </style>
 </head>
-<body style="font-family:sans-serif;text-align:center;margin-top:100px">
+
+<body>
     <h1>Привіт, доню. Я тебе чекав :)</h1>
-    Давай відгадаємо код до твоєі скриньки.
+
+    <div class="intro">
+        Давай відгадаємо код до твоєї скриньки.
+    </div>
+
+    <h2>Третя цифра</h2>
+
+    <p><strong>Доведи, що ти не робот :)</strong></p>
+    <p>Де це знаходиться?</p>
+
+    <div class="captcha-wrap">
+        <div class="map-captcha">
+            <img src="Europe.png" alt="Карта Європи">
+
+            <div class="cells">
+                <button type="button" data-digit="1" aria-label="Квадрат 1"></button>
+                <button type="button" data-digit="2" aria-label="Квадрат 2"></button>
+                <button type="button" data-digit="3" aria-label="Квадрат 3"></button>
+                <button type="button" data-digit="4" aria-label="Квадрат 4"></button>
+                <button type="button" data-digit="5" aria-label="Квадрат 5"></button>
+                <button type="button" data-digit="6" aria-label="Квадрат 6"></button>
+                <button type="button" data-digit="7" aria-label="Квадрат 7"></button>
+                <button type="button" data-digit="8" aria-label="Квадрат 8"></button>
+                <button type="button" data-digit="9" aria-label="Квадрат 9"></button>
+            </div>
+        </div>
+
+        <div class="clue">
+            <div class="arrow">←</div>
+            <img src="object.png" alt="Підказка">
+        </div>
+    </div>
+
+    <div id="result3">Третя цифра коду: ?</div>
+
+    <script>
+        const cells = document.querySelectorAll('.map-captcha button');
+        const result3 = document.getElementById('result3');
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                cells.forEach(c => c.classList.remove('selected'));
+                cell.classList.add('selected');
+
+                result3.textContent =
+                    'Третя цифра коду: ' + cell.dataset.digit;
+            });
+        });
+    </script>
 </body>
 </html>

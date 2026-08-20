@@ -35,7 +35,7 @@
             text-align: center;
         }
 
-        #result {
+        #result, #result2, #result3 {
             margin-top: 30px;
             padding: 20px;
             text-align: center;
@@ -58,14 +58,6 @@
             padding: 12px 20px;
             font-size: 1.1rem;
             cursor: pointer;
-        }
-
-        #result2 {
-            margin-top: 30px;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
         }
 
         .captcha {
@@ -98,14 +90,6 @@
 
         .captcha button.selected {
             background: rgba(80, 120, 180, 0.16);
-        }
-
-        #result2 {
-            margin-top: 30px;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -223,7 +207,8 @@
                 0
             );
 
-            const digit = Math.floor(sum / 4);
+            const quotient = sum / 4;
+            const digit = Number.isInteger(quotient) ? quotient : 0;
 
             result.textContent = 'Перша цифра коду: ' + digit;
         }

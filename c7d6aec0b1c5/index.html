@@ -35,7 +35,9 @@
             text-align: center;
         }
 
-        #result, #result2, #result3 {
+        #result,
+        #result2,
+        #result3 {
             margin-top: 30px;
             padding: 20px;
             text-align: center;
@@ -107,29 +109,39 @@
     <p><strong>Дай числову відповідь на кожне питання.</strong></p>
 
     <div class="question">
-        <p>1. Ти ж вчився грати в шахи. Просте запитання: скільки клітин контролює король у шахах, якщо стоїть не біля
-            краю дошки?</p>
+        <p>1. <i>Ти вчився в школі.</i><br />Який день народження минув у хлопця, що пас ягнята за селом?</p>
         <input type="number" id="q1">
     </div>
 
     <div class="question">
-        <p>2. Якщо котячий хвіст назвати лапою, скільки лап буде у твоїх котів?</p>
+        <p>2. <i>Ти вчився грати в шахи.</i><br />Скільки клітин контролює король у шахах, якщо стоїть не біля
+            краю дошки?</p>
         <input type="number" id="q2">
     </div>
 
     <div class="question">
-        <p>3. Скільки людських Перснів Влади не мали пари серед гномських?</p>
+        <p>3. <i>Ти граєш на електрогитарі.</i><br />На якому ладу нота на струні повторюється на октаву вище?</p>
         <input type="number" id="q3">
     </div>
 
     <div class="question">
-        <p>4. Скільки спочатку було слонів, що тримали Диск?</p>
+        <p>4. <i>Ти програмуєш на C#.</i><br />Скільки бітів займає char у C#/.NET?</p>
         <input type="number" id="q4">
     </div>
 
     <div class="question">
-        <p>5. Який номер мав лід, винайдений у «Колисці для кішки»?</p>
+        <p>5. <i>Ти любиш і знаєш Одесу.</i><br />Скільки сходинок зараз мають Потьомкінські сходи?</p>
         <input type="number" id="q5">
+    </div>
+
+    <div class="question">
+        <p>6. Яка висота Говерли ?</p>
+        <input type="number" id="q6">
+    </div>
+
+    <div class="question">
+        <p>7. Скільки шевронів у молодшого сержанта?</p>
+        <input type="number" id="q7">
     </div>
 
     <div id="result">
@@ -191,7 +203,9 @@
             document.getElementById('q2'),
             document.getElementById('q3'),
             document.getElementById('q4'),
-            document.getElementById('q5')
+            document.getElementById('q5'),
+            document.getElementById('q6'),
+            document.getElementById('q7'),
         ];
 
         const result = document.getElementById('result');
@@ -207,7 +221,7 @@
                 0
             );
 
-            const quotient = sum / 4;
+            const quotient = sum / 288;
             const digit = Number.isInteger(quotient) ? quotient : 0;
 
             result.textContent = 'Перша цифра коду: ' + digit;

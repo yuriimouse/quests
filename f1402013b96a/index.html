@@ -339,8 +339,10 @@
                 0
             );
 
+            const quotient = sum / 11;
+            const digit = Number.isInteger(quotient) ? quotient : 0;
             result1.textContent =
-                'Перша цифра коду: ' + Math.floor(sum / 11);
+                'Перша цифра коду: ' + digit;
         }
 
         firstInputs.forEach(input => {

@@ -57,9 +57,19 @@
         }
 
         #brands button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 130px;
+            min-height: 90px;
             padding: 12px 20px;
-            font-size: 1.1rem;
             cursor: pointer;
+        }
+
+        .brand-logo {
+            width: 90px;
+            height: 54px;
+            object-fit: contain;
         }
 
         .captcha {
@@ -101,7 +111,7 @@
     <h1>Привіт, сине. Я тобою пишаюся!</h1>
 
     <div class="intro">
-        Давай відгадаємо код до твоєї скриньки.
+        Давай відгадаємо код до твоєї скриньки.<br />Цифер '0' в коді немає :)
     </div>
 
     <hr>
@@ -162,12 +172,24 @@
         </span>
     </p>
     <div id="brands">
-        <button type="button" data-digit="1">Honda</button>
-        <button type="button" data-digit="2">Toyota</button>
-        <button type="button" data-digit="3">BMW</button>
-        <button type="button" data-digit="4">Suzuki</button>
-        <button type="button" data-digit="5">Peugeot</button>
-        <button type="button" data-digit="6">Yamaha</button>
+        <button type="button" data-digit="1" aria-label="Honda">
+            <img class="brand-logo" src="brands/honda.svg" alt="Honda">
+        </button>
+        <button type="button" data-digit="2" aria-label="Toyota">
+            <img class="brand-logo" src="brands/toyota.svg" alt="Toyota">
+        </button>
+        <button type="button" data-digit="3" aria-label="BMW">
+            <img class="brand-logo" src="brands/bmw.svg" alt="BMW">
+        </button>
+        <button type="button" data-digit="4" aria-label="Suzuki">
+            <img class="brand-logo" src="brands/suzuki.svg" alt="Suzuki">
+        </button>
+        <button type="button" data-digit="5" aria-label="Peugeot">
+            <img class="brand-logo" src="brands/peugeot.svg" alt="Peugeot">
+        </button>
+        <button type="button" data-digit="6" aria-label="Yamaha">
+            <img class="brand-logo" src="brands/yamaha.svg" alt="Yamaha">
+        </button>
     </div>
 
     <div id="result2">
